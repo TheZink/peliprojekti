@@ -22,4 +22,10 @@ def create_game(game_airports):
     kursori.execute(sql)
     tulos = kursori.fetchall()
 
+def update_game():
+    pass
+
+def close_game():
+    pass
+
 
