@@ -25,7 +25,7 @@ def gameover(player_name):
         # user input
         answer = input ("user answer: ")
         if answer == "R":
-            print ("Retart the game")
+            print ("Restart the game")
         elif answer == "Q":
             print("Quit the game, Thanks for playing!")
             break  
