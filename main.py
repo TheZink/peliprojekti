@@ -22,7 +22,7 @@ import game_start, game_go, game_over
 # game_start.print_story()
 # game_start.print_startinfo()
 # game_start.print_airportinfo()
-
+# game_go.player_options()
 
 # functions to run this game session
 # in game_go.py
