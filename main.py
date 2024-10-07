@@ -14,18 +14,21 @@ import game_start, game_go, game_over
 # Python runtime enviroment and IDE
 # install geopy python library
 
-
 # functions to setup new game for new player
 # in game_start.py
-# game_start.new_player()
+# game_start.set_new_player()
 # game_start.set_airports()
 # game_start.print_story()
 # game_start.print_startinfo()
-# game_start.print_airportinfo()
-# game_go.player_options()
+
+
 
 # functions to run this game session
 # in game_go.py
+# game_go.random_5_airports()
+# game_go.player_options()
+# game_go.choose_where_to_go()
+
 
 
 # functions to end this game session

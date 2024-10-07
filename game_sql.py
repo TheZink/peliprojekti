@@ -27,6 +27,7 @@ def create_game(game_airports):
     for time in range(15):
         choice_airport = random.choice(tulos)
         if choice_airport not in game_airports:
+            # add new random airport to dictionary and add random 1-15 boxes to airport
             game_airports[choice_airport[0]] = random.randint(1,15) #Generate random numbers for airport.
     
     return game_airports
@@ -66,7 +67,7 @@ def airplane_info(plane_id):
         
 # function update player values
 def update_game(player_name,distance,used_time,cons_gas):
-    sql = f"UPDATE player SET distance = {distance}, used_time = {used_time}, cons_gas = {cons_gas} WHERE name = '{player_name}';"
+    sql = f"UPDATE player SET distance = distance+{distance}, used_time = used_time+{used_time}, cons_gas = cons_gas+{cons_gas} WHERE name = '{player_name}';"
     kursori = yhteys.cursor()
     kursori.execute(sql)
 
