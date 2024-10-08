@@ -22,7 +22,7 @@ def print_startinfo():
     print()
 
     # kerrotaan pelaajalle hänen lentokoneen tiedot
-    print(f"Käytössäsi on hieno {game_sql.airplane_info(game_var.airplane)[0]} lentokone,\njoka kuluttaa {game_sql.airplane_info(game_var.airplane)[1]} litraa bensaa per 100km\nja joka lentää {(game_sql.airplane_info(game_var.airplane)[2])*3.6:.0f} km/h nopeudella\nja johon mahtuu {game_sql.airplane_info(game_var.airplane)[3]} laatikkoa kyytiin.\nKone on tällä hetkellä tyhjä.")
+    print(f"Käytössäsi on hieno {game_sql.airplane_info(game_var.airplane)[0]} lentokone,\njoka kuluttaa {game_sql.airplane_info(game_var.airplane)[1]} litraa bensaa per 100km\nja joka lentää {(game_sql.airplane_info(game_var.airplane)[2])*3.6:.0f} km/h nopeudella\nja johon mahtuu kaikkiaan {game_sql.airplane_info(game_var.airplane)[3]} laatikkoa kyytiin.\nKone on tällä hetkellä tyhjä.")
     print()
 
 

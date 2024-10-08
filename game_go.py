@@ -112,6 +112,7 @@ def at_home_airport():
     # repeat until enough boxes delivered
     if game_var.boxes_delivered < game_var.boxes_to_transport:
         print(f"Tervetuloa kotiin!\nKotona on nyt {game_var.boxes_delivered} laatikkoa.\nSinun pitää toimittaa tänne yhteensä {game_var.boxes_to_transport} laatikkoa.\nEli sinun pitää hakea vielä {(game_var.boxes_to_transport)-(game_var.boxes_delivered)} laatikkoa.")
+        print(f"Koneesi on taas tyhjä. Eli koneeseen mahtuu taas {game_sql.airplane_info(game_var.airplane)[3]} laatikkoa kyytiin.")
         print()
         random_5_airports()
     # if boxes_delivered >= game_start.boxes_to_transport:
