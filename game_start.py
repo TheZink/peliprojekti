@@ -17,6 +17,7 @@ def set_new_player():
     game_sql.create_users(game_var.player_name)
     print(f"Tervetuloa pilotti {game_var.player_name}")
     print()
+    print(game_var.player_id)
 
 # Setup airports and boxes for this game session
 def set_airports():

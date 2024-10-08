@@ -1,6 +1,6 @@
 # This file contains all functions to and from our database
 
-import mysql.connector, random
+import mysql.connector, game_var, random
 game_airports = {}
 yhteys = mysql.connector.connect(
     host="localhost",
@@ -16,6 +16,8 @@ def create_users(player_name):
     sql = f"INSERT INTO PLAYER (name,ap_ident,distance,used_time,cons_gas,money,score) VALUES ('{player_name}','EFHK',0,0,0,0,0);"
     kursori = yhteys.cursor()
     kursori.execute(sql)
+    user_id = kursori.lastrowid
+    game_var.player_id = user_id
     
 #Function select randomly airports from EU continents and add them to dictionary. Its also select random values for each airports
 def create_game(game_airports):
@@ -67,18 +69,19 @@ def airplane_info(plane_id):
         
 # function update player values
 def update_game(player_name,distance,used_time,cons_gas):
-    sql = f"UPDATE player SET distance = distance+{distance}, used_time = used_time+{used_time}, cons_gas = cons_gas+{cons_gas} WHERE name = '{player_name}';"
+    # distance in km, used_time in hours, cons_gas in litres
+    sql = f"UPDATE player SET distance = distance+{distance}, used_time = used_time+{used_time}, cons_gas = cons_gas+{cons_gas} WHERE name = '{player_name}' and player_id = {game_var.player_id};"
     kursori = yhteys.cursor()
     kursori.execute(sql)
-    print(f"{sql}")
 
 # Function to get players info. Function return distance, used_time, cons_gas, money and score
 def close_game(player_name):
-    sql = f"SELECT * FROM player WHERE name = '{player_name}'"
+    sql = f"SELECT * FROM player WHERE name = '{player_name}' and player_id = {game_var.player_id}"
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchall()
     
     for player in tulos:
+        # distance, used_time, cons_gas, money, score
         return(player[3],player[4],player[5],player[6],player[7])
     

@@ -48,4 +48,6 @@ while True:
 
     # functions to end this game session
     # in game_over.py
-    game_over.gameover()
+    end_game = game_over.gameover()
+    if end_game == False:
+        break

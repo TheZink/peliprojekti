@@ -1,6 +1,7 @@
-import game_sql
 
 player_name = ""
+
+player_id = 0
 
 game_airports = {}
 
@@ -14,4 +15,4 @@ boxes_delivered = 0
 
 boxes_in_plane = 0
 
-plane_cap = game_sql.airplane_info(airplane)[3]
+#plane_cap = game_sql.airplane_info(airplane)[3]

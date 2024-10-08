@@ -62,7 +62,7 @@ def moving_ap2ap(ident,location):
     fuel_consumed = game_math.calculate_fuel(distance, fuel_burn_rate)
     time_spent = game_math.calculate_time_spent(distance, speed)
     # update database player stats
-    print(f"{game_var.player_name}")
+    # print(f"{game_var.player_name}")
     game_sql.update_game(game_var.player_name, distance, time_spent, fuel_consumed)
     if ident == game_var.home_airport:
         at_home_airport()
@@ -70,17 +70,17 @@ def moving_ap2ap(ident,location):
         at_new_airport(location)
 
 def at_new_airport(location):
-    empty_room_in_plane = game_var.plane_cap - game_var.boxes_in_plane
+    empty_room_in_plane = game_sql.airplane_info(game_var.airplane)[3] - game_var.boxes_in_plane
     if airports[location] < empty_room_in_plane:
         loading = airports[location]
     else:
         loading = empty_room_in_plane
-    print(f"Saavuit {game_sql.get_information(location)[0]} lentokentälle.\nKentällä on {airports[location]} laatikkoa odottamassa noutoa.\nKoneeseen mahtuu vielä {game_var.plane_cap-game_var.boxes_in_plane} laatikkoa.")
+    print(f"Saavuit {game_sql.get_information(location)[0]} lentokentälle.\nKentällä on {airports[location]} laatikkoa odottamassa noutoa.\nKoneeseen mahtuu vielä {game_sql.airplane_info(game_var.airplane)[3]-game_var.boxes_in_plane} laatikkoa.")
     game_var.boxes_in_plane = game_var.boxes_in_plane + loading
     print(f"Koneeseesi lastattiin {loading} laatikkoa.\nKoneessa on nyt {game_var.boxes_in_plane} laatikkoa.")
-    print(f"Koneeseen mahtuu vielä {game_var.plane_cap-game_var.boxes_in_plane} laatikkoa.")
+    print(f"Koneeseen mahtuu vielä {game_sql.airplane_info(game_var.airplane)[3]-game_var.boxes_in_plane} laatikkoa.")
     print()
-    if game_var.boxes_in_plane == game_var.plane_cap:
+    if game_var.boxes_in_plane == game_sql.airplane_info(game_var.airplane)[3]:
         print("Aika viedä laatikot kotiin!") # after this direct player to go back home to deliver boxes
     # give player options what to do next
     player_input = input("Mitä haluat tehdä?\nVoit valita 'jatka' ja hakea lisää laatikoita\ntai viedä jo kyydissä olevat laatikot 'kotiin': ")
