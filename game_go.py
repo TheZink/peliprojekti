@@ -35,6 +35,7 @@ def random_5_airports():
 # if lauseella, valitaan pelaajan valitsema kenttä
 
 def choose_where_to_go():
+    print()
     print("Laatikoita löytyy muun muuassa näistä lentokentiltä:")
     # print 5 airports (name, distance, boxes)
     number = 1
@@ -102,6 +103,7 @@ def at_new_airport(location):
     '''
 
 def at_home_airport():
+    print()
     # unload boxes
     # manage and keep track of boxes (picked up into airplane from airport / delivered to airport) 
     game_var.boxes_delivered += game_var.boxes_in_plane
@@ -109,6 +111,7 @@ def at_home_airport():
     # check if enough boxes at home? if enough go to END GAME
     # repeat until enough boxes delivered
     if game_var.boxes_delivered < game_var.boxes_to_transport:
+        print(f"Tervetuloa kotiin!\nKotona on nyt {game_var.boxes_delivered} laatikkoa.\nSinun pitää toimittaa tänne yhteensä {game_var.boxes_to_transport} laatikkoa.\nEli sinun pitää hakea vielä {(game_var.boxes_to_transport)-(game_var.boxes_delivered)} laatikkoa.")
         random_5_airports()
     # if boxes_delivered >= game_start.boxes_to_transport:
         # end game_go.py and move to game_over.py

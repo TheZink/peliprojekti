@@ -6,7 +6,7 @@ def gameover():
     
 # print congratulations to player
 
-    print("congrats on completing the game!")
+    print("Onnea! Olet läpäissyt pelin!")
     print ("Haluatko pelata uusiksi?")
     print()
 
