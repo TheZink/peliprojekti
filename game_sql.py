@@ -1,7 +1,9 @@
 # This file contains all functions to and from our database
 
 import mysql.connector, game_var, random
+
 game_airports = {}
+
 yhteys = mysql.connector.connect(
     host="localhost",
     port=3306,

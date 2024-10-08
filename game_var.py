@@ -1,3 +1,4 @@
+# All game global variables
 
 player_name = ""
 

@@ -2,15 +2,6 @@
 
 import game_sql, game_var
 
-#game_airports = {}
-#boxes_to_transport = 15
-#home_airport = "EFHK"
-#airplane = 1
-# Following game progress in game_go
-#boxes_delivered = 0 
-#boxes_in_plane = 0
-#plane_cap = game_sql.airplane_info(airplane)[3]
-
 # Setup new player info
 def set_new_player():
     game_var.player_name = input("Kirjoita nimesi tähän: ")
