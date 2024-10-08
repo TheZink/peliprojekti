@@ -12,6 +12,8 @@ import game_start, game_go, game_over
 
 # REQUIREMENTS!
 # Python runtime enviroment and IDE
+# install sql-connector-python
+# install pysql
 # install geopy python library
 
 # Tell the game story

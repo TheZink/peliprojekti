@@ -11,9 +11,9 @@ def gameover():
 
 # print statistics
     #print(f"Pisteet: {game_sql.close_game(game_var.player_name)[4]}")
-    print(f"Käytetty lentoaika: {game_sql.close_game(game_var.player_name)[1]} tuntia.")
-    print(f"Lennetty matka yhteensä: {game_sql.close_game(game_var.player_name)[0]} kilometriä")
-    print(f"Kulutettu polttoaine: {game_sql.close_game(game_var.player_name)[2]} litraa.")
+    print(f"Käytetty lentoaika: {game_sql.close_game(game_var.player_name)[1]:.0f} tuntia.")
+    print(f"Lennetty matka yhteensä: {game_sql.close_game(game_var.player_name)[0]:.2f} kilometriä")
+    print(f"Kulutettu polttoaine: {game_sql.close_game(game_var.player_name)[2]:.2f} litraa.")
     print()
     
 
@@ -27,15 +27,17 @@ def gameover():
         # user input
         answer = str.upper(input("Syötä vaihtoehtosi: "))
         if answer == "R":
-            print("Alustetaan peli uudestaan")
+            print("Hienoa! Alustetaan peli uudestaan!")
             print()
             return True
             
         elif answer == "Q":
+            print("Kiitos pelaamisesta! Toivottavasti sinulla oli hauskaa!")
+            print()
             # go back to main and return false boolean
             return False 
         else:
-            print("Väärä valinta. Valitse 'R' jotta jatkuu 'Q' lopetat pelin.")   
+            print("Väärä valinta. Valitse 'R' jotta jatkuu 'Q' lopetat pelin.")
             print()
 
 # at the end return back to main.py with return
