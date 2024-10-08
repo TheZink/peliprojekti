@@ -70,6 +70,7 @@ def update_game(player_name,distance,used_time,cons_gas):
     sql = f"UPDATE player SET distance = distance+{distance}, used_time = used_time+{used_time}, cons_gas = cons_gas+{cons_gas} WHERE name = '{player_name}';"
     kursori = yhteys.cursor()
     kursori.execute(sql)
+    print(f"{sql}")
 
 # Function to get players info. Function return distance, used_time, cons_gas, money and score
 def close_game(player_name):

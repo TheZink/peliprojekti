@@ -1,26 +1,33 @@
 # This file runs all ingame functions while player plays the game
 
-import game_sql, game_start, game_math, random
+import game_sql, game_var, game_math, random
 
 # gameplay follow up variables
 
 # airports dictionary has aiport ident and number of boxes in that airport
-airports = game_start.game_airports
-location = game_start.home_airport
-random_choice, visited = [], []
-name = game_start.player_name
+airports = game_var.game_airports
+location = game_var.home_airport
+random_choice, visited, keys = [], [], []
+
 
 # we give player 5 different airports in random
 
 # Function select randomly 5 airports from game_airports dictionary
 # random_choice list gets airport ident codes only from dictionary
 def random_5_airports():
-    random_choice.clear()
+    # make list of all keys in games airports
     keys = list(airports.keys())
+    # empty random choise list
+    random_choice.clear()
     while len(random_choice) < 5:
+        # select a random ident from list
         random_ident = random.choice(keys)
-        if random_ident not in random_choice and not visited: 
-            random_choice.append(random_ident)
+        # add random ident to random choise list if not in it and not in visited
+        if random_ident not in random_choice:
+            if random_ident not in visited:
+                if random_ident != game_var.home_airport:
+                    random_choice.append(random_ident)
+        # repeat until 5 added?
     choose_where_to_go()
     
 # print options for player what player can do: choose next airport where to fly
@@ -36,6 +43,7 @@ def choose_where_to_go():
         number += 1
     # make player choose where to go
     choice = int(input("Mille kentälle haluat lentää seuraavaksi?: "))
+    print()
     moving_ap2ap(random_choice[choice-1],location)
 
 
@@ -45,48 +53,43 @@ def moving_ap2ap(ident,location):
     prev_coords = game_sql.get_coordinates(location)
     dest_coords = game_sql.get_coordinates(ident)
     location = ident
-    visited.append(ident)
+    if ident != game_var.home_airport:
+        visited.append(ident)
     # calculate traveled distance, used time, used fuel
     distance = game_math.distance_calculate(prev_coords[0], prev_coords[1], dest_coords[0], dest_coords[1])
-    fuel_burn_rate = game_sql.airplane_info(game_start.airplane)[2]
-    speed = game_sql.airplane_info(game_start.airplane)[3]
+    fuel_burn_rate = game_sql.airplane_info(game_var.airplane)[2]
+    speed = game_sql.airplane_info(game_var.airplane)[3]
     fuel_consumed = game_math.calculate_fuel(distance, fuel_burn_rate)
     time_spent = game_math.calculate_time_spent(distance, speed)
     # update database player stats
-    game_sql.update_game(name, distance, time_spent, fuel_consumed)
-    if ident == game_start.home_airport:
+    print(f"{game_var.player_name}")
+    game_sql.update_game(game_var.player_name, distance, time_spent, fuel_consumed)
+    if ident == game_var.home_airport:
         at_home_airport()
     else:
         at_new_airport(location)
 
 def at_new_airport(location):
-    empty_room_in_plane = game_start.plane_cap - game_start.boxes_in_plane
+    empty_room_in_plane = game_var.plane_cap - game_var.boxes_in_plane
     if airports[location] < empty_room_in_plane:
         loading = airports[location]
     else:
         loading = empty_room_in_plane
-    print(f"Saavuit {game_sql.get_information(location)[0]} lentokentälle.\nKentällä on {airports[location]} laatikkoa odottamassa noutoa.\nKoneeseen mahtuu vielä {game_start.plane_cap-game_start.boxes_in_plane} laatikkoa.")
-    game_start.boxes_in_plane = game_start.boxes_in_plane + loading
-    print(f"Koneeseesi lastattiin {loading} laatikkoa.\nKoneessa on nyt {game_start.boxes_in_plane} laatikkoa.")
-    print(f"Koneeseen mahtuu vielä {game_start.plane_cap-game_start.boxes_in_plane} laatikkoa.")
-    if game_start.boxes_in_plane == game_start.plane_cap:
+    print(f"Saavuit {game_sql.get_information(location)[0]} lentokentälle.\nKentällä on {airports[location]} laatikkoa odottamassa noutoa.\nKoneeseen mahtuu vielä {game_var.plane_cap-game_var.boxes_in_plane} laatikkoa.")
+    game_var.boxes_in_plane = game_var.boxes_in_plane + loading
+    print(f"Koneeseesi lastattiin {loading} laatikkoa.\nKoneessa on nyt {game_var.boxes_in_plane} laatikkoa.")
+    print(f"Koneeseen mahtuu vielä {game_var.plane_cap-game_var.boxes_in_plane} laatikkoa.")
+    print()
+    if game_var.boxes_in_plane == game_var.plane_cap:
         print("Aika viedä laatikot kotiin!") # after this direct player to go back home to deliver boxes
     # give player options what to do next
     player_input = input("Mitä haluat tehdä?\nVoit valita 'jatka' ja hakea lisää laatikoita\ntai viedä jo kyydissä olevat laatikot 'kotiin': ")
-
+    print()
+    # player chooses what to do
     if player_input == "jatka": random_5_airports()
-    elif player_input == "kotiin": moving_ap2ap(game_start.home_airport,location)
+    elif player_input == "kotiin": moving_ap2ap(game_var.home_airport,location)
 
-    # room for boxes in airplane? (airplane capasity, plus if some capasity used at the moment)
-    # boxes at current airport? (dictionary of all 15 airports)
 
-    # pickup boxes? (how many available at airport and how many fits in airplane?)
-    # print user how much room in plane, how many boxes at airport
-    # offer player to choose now many to pickup, can pickup also 0
-
-    #boxes_at_airport = game_sql.airplane_info(airplane)[3]
-    #current_boxes = 0
-    #picked_up_boxes = 
 
     '''
     if current_boxes > 0:
@@ -97,23 +100,20 @@ def at_new_airport(location):
             current_boxes -= boxes_delivered
 
     '''
-    # choose next airport, home or next 5 random
 
 def at_home_airport():
-    print("kotona")
-    pass
     # unload boxes
-    # check if enough boxes at home? if enough go to END GAME
     # manage and keep track of boxes (picked up into airplane from airport / delivered to airport) 
+    game_var.boxes_delivered += game_var.boxes_in_plane
+    game_var.boxes_in_plane = 0
+    # check if enough boxes at home? if enough go to END GAME
     # repeat until enough boxes delivered
+    if game_var.boxes_delivered < game_var.boxes_to_transport:
+        random_5_airports()
     # if boxes_delivered >= game_start.boxes_to_transport:
         # end game_go.py and move to game_over.py
-    # else: print some stats and choose next 5 random airports
 
 
-game_start.set_airports()
-random_5_airports()
-choose_where_to_go()
 
 '''
 Jos halutaan värikästä tekstiä terminaaliin:

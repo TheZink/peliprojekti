@@ -1,43 +1,40 @@
 # This file runs all the functions at the end of the game
 
-import game_sql, game_start, game_math
+import game_sql, game_var
 
-def gameover(player_name):
+def gameover():
     
 # print congratulations to player
 
     print("congrats on completing the game!")
-    print ("would you like to play again?")
+    print ("Haluatko pelata uusiksi?")
 
 # print statistics
 
-    print(f"score: {game_sql.close_game(player_name)[4]}")
-    print(f"Time played: {game_sql.close_game(player_name)[1]} minutes")
-    print(f"Consumed fuel: {game_sql.close_game(player_name)[2]}")
+    print(f"Pisteet: {game_sql.close_game(game_var.player_name)[4]}")
+    print(f"Pelattu aika: {game_sql.close_game(game_var.player_name)[1]} min")
+    print(f"Kulutettu polttoaine: {game_sql.close_game(game_var.player_name)[2]}")
     
 
 # ask player to play again or quit
 
-    print("do you want to play again or quit?")
-    print("Press R to restart or Q to quit.")
+    print("Haluatko jatkaa vai lopettaa?")
+    print("R aloittaa uusiksi, Q lopettaa.")
 
     while True:
         # user input
-        answer = input ("user answer: ")
+        answer = input ("Syötä vaihtoehtosi: ")
         if answer == "R":
-            print ("Restart the game")
+            print ("Alustetaan peli uudestaan")
+            return True
+            
         elif answer == "Q":
-            print("Quit the game, Thanks for playing!")
-            break  
+            return False 
         else:
-            print ("Invalid input. Please press 'R' to continue or 'Q' to quit the game")   
+            print ("Väärä valinta. Valitse 'R' jotta jatkuu 'Q' lopetat pelin.")   
 
-# at the end
+# at the end return back to main.py with return
 
 #while gameover = True
     #gamedisplay = "game over, press ok to play again or Q to quit"
-
-
-gameover("Ilkka")
-
    
