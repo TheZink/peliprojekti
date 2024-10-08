@@ -71,6 +71,7 @@ def airplane_info(plane_id):
     tulos = kursori.fetchall()
 
     for content in tulos:
+        # return: ap name, ap fuel ratio litres per 100km, ap speed in m/s and ap max box capasity
         return (content[1], content[2], content[3], content[4])
 
 

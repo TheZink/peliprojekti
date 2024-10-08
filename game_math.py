@@ -10,7 +10,7 @@ def distance_calculate(latitude1, longitude1, latitude2, longitude2):
     location1 = (latitude1, longitude1)
     location2 = (latitude2, longitude2)
 
-    distance = geodesic(location1, location2).kilometers
+    distance = geodesic(location1, location2).km
 
     # return distance in kilometers
     return distance
@@ -21,14 +21,14 @@ def distance_calculate(latitude1, longitude1, latitude2, longitude2):
 def calculate_fuel(distance, fuel_burn_rate):
     # fuel_burn_rate in database in litres per 100km
     # calculate litres used
-    fuel_consumed = distance * fuel_burn_rate / 100
+    fuel_consumed = distance * (fuel_burn_rate / 100)
     # return used fuel in litres
     return fuel_consumed
 
 
-# time spent
-# speed in database in metres per second
-# distance in km
+# Function to calculate time spent while flying
+# distance is in km
+# speed in database is in metres per second
 def calculate_time_spent(distance, speed):
     time_spent = distance / (speed * 3.6)
     # return time_spend in hours
