@@ -26,6 +26,7 @@ def gameover():
     while True:
         # user input
         answer = str.upper(input("Syötä vaihtoehtosi: "))
+        print()
         if answer == "R":
             print("Hienoa! Alustetaan peli uudestaan!")
             print()
