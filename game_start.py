@@ -5,10 +5,11 @@ import game_sql, game_var
 # Setup new player info
 def set_new_player():
     game_var.player_name = input("Kirjoita nimesi tähän: ")
+    print()
     game_sql.create_users(game_var.player_name)
     print(f"Tervetuloa pilotti {game_var.player_name}")
     print()
-    print(game_var.player_id)
+    # print(game_var.player_id)
 
 # Setup airports and boxes for this game session
 def set_airports():

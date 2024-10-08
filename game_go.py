@@ -6,12 +6,11 @@ import game_sql, game_var, game_math, random
 
 # airports dictionary has aiport ident and number of boxes in that airport
 airports = game_var.game_airports
+# home airport ident
 location = game_var.home_airport
 random_choice, visited, keys = [], [], []
 
-
 # we give player 5 different airports in random
-
 # Function select randomly 5 airports from game_airports dictionary
 # random_choice list gets airport ident codes only from dictionary
 def random_5_airports():
@@ -35,8 +34,8 @@ def random_5_airports():
 # if lauseella, valitaan pelaajan valitsema kenttä
 
 def choose_where_to_go():
-    print()
     print("Laatikoita löytyy muun muuassa näistä lentokentiltä:")
+    print()
     # print 5 airports (name, distance, boxes)
     number = 1
     for ident in random_choice:
@@ -77,12 +76,14 @@ def at_new_airport(location):
     else:
         loading = empty_room_in_plane
     print(f"Saavuit {game_sql.get_information(location)[0]} lentokentälle.\nKentällä on {airports[location]} laatikkoa odottamassa noutoa.\nKoneeseen mahtuu vielä {game_sql.airplane_info(game_var.airplane)[3]-game_var.boxes_in_plane} laatikkoa.")
+    print()
     game_var.boxes_in_plane = game_var.boxes_in_plane + loading
     print(f"Koneeseesi lastattiin {loading} laatikkoa.\nKoneessa on nyt {game_var.boxes_in_plane} laatikkoa.")
     print(f"Koneeseen mahtuu vielä {game_sql.airplane_info(game_var.airplane)[3]-game_var.boxes_in_plane} laatikkoa.")
     print()
     if game_var.boxes_in_plane == game_sql.airplane_info(game_var.airplane)[3]:
-        print("Aika viedä laatikot kotiin!") # after this direct player to go back home to deliver boxes
+        print("Nyt olisi hyvä hetki viedä laatikoita kotiin!") # after this direct player to go back home to deliver boxes
+        print()
     # give player options what to do next
     player_input = input("Mitä haluat tehdä?\nVoit valita 'jatka' ja hakea lisää laatikoita\ntai viedä jo kyydissä olevat laatikot 'kotiin': ")
     print()
@@ -103,7 +104,6 @@ def at_new_airport(location):
     '''
 
 def at_home_airport():
-    print()
     # unload boxes
     # manage and keep track of boxes (picked up into airplane from airport / delivered to airport) 
     game_var.boxes_delivered += game_var.boxes_in_plane
@@ -112,6 +112,7 @@ def at_home_airport():
     # repeat until enough boxes delivered
     if game_var.boxes_delivered < game_var.boxes_to_transport:
         print(f"Tervetuloa kotiin!\nKotona on nyt {game_var.boxes_delivered} laatikkoa.\nSinun pitää toimittaa tänne yhteensä {game_var.boxes_to_transport} laatikkoa.\nEli sinun pitää hakea vielä {(game_var.boxes_to_transport)-(game_var.boxes_delivered)} laatikkoa.")
+        print()
         random_5_airports()
     # if boxes_delivered >= game_start.boxes_to_transport:
         # end game_go.py and move to game_over.py
