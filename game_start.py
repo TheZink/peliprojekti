@@ -17,12 +17,12 @@ def set_airports():
 
 # print the start info to player
 def print_startinfo():
-    print(f"Olet tällä hetkellä {game_sql.get_information(game_var.home_airport)[0]} lentokentällä\nSe sijaitsee maassa {game_sql.get_information(game_var.home_airport)[2]}.")
-    print(f"Tämä kenttä on kotikenttäsi, josta lähdet liikkeelle\nja jonne sinun tulee noutaa laatikoita.")
+    print(f"Olet tällä hetkellä {game_sql.get_information(game_var.home_airport)[0]} lentokentällä.\nSe sijaitsee maassa {game_sql.get_information(game_var.home_airport)[2]}.")
+    print(f"Tämä kenttä on kotikenttäsi, josta lähdet liikkeelle.\nJa jonne sinun tulee noutaa laatikoita.")
     print()
 
     # kerrotaan pelaajalle hänen lentokoneen tiedot
-    print(f"Käytössäsi on hieno {game_sql.airplane_info(game_var.airplane)[0]} lentokone,\njoka kuluttaa {game_sql.airplane_info(game_var.airplane)[1]} litraa bensaa per 100km\nja joka lentää {(game_sql.airplane_info(game_var.airplane)[2])*3.6:.0f} km/h nopeudella\nja johon mahtuu kaikkiaan {game_sql.airplane_info(game_var.airplane)[3]} laatikkoa kyytiin.\nKone on tällä hetkellä tyhjä.")
+    print(f"Käytössäsi on hieno {game_sql.airplane_info(game_var.airplane)[0]} rahtilentokone, joka\n- kuluttaa {game_sql.airplane_info(game_var.airplane)[1]} litraa bensaa per 100km\n- lentää {(game_sql.airplane_info(game_var.airplane)[2])*3.6:.0f} km/h nopeudella\n- ja johon mahtuu kaikkiaan {game_sql.airplane_info(game_var.airplane)[3]} laatikkoa kyytiin.\n\nKone on tällä hetkellä tyhjä.")
     print()
 
 
