@@ -3,7 +3,6 @@
 import game_sql, game_var
 
 def gameover():
-    
 # print congratulations to player
     print("Onnea! Olet läpäissyt pelin!")
     print()
@@ -15,7 +14,18 @@ def gameover():
     print(f"Lennetty matka yhteensä: {game_sql.close_game(game_var.player_name)[0]:.0f} kilometriä")
     print(f"Kulutettu polttoaine: {game_sql.close_game(game_var.player_name)[2]:.2f} litraa.")
     print()
-    
+
+# print game high scores
+    print("Tähän vielä tuloste pelin Highscore, parhaat 5 pelaajaa?")
+    print("1. Mut vielä silti parempi pelaaja")
+    print("2. Ihan paras pelaaja")
+    print("3. Tosi hyvä pelaaja")
+    print("4. Suht hyvä pelaaja")
+    print("5. Ihan ok pelaaja")
+    print()
+
+# reset game engine stats
+    game_var.boxes_delivered = 0
 
 # ask player to play again or quit
     print("Haluatko pelata uudestaan vai lopettaa?")
@@ -47,4 +57,4 @@ def gameover():
 
 #while gameover = True
     #gamedisplay = "game over, press ok to play again or Q to quit"
-   
+
