@@ -17,7 +17,7 @@ def distance_calculate(latitude1, longitude1, latitude2, longitude2):
 # This function calculates how much fuel airplane has used
 # fuel_burn_rate is in database in airplane table
 def calculate_fuel(distance, fuel_burn_rate):
-    # fuel_burn_rate in database in litres per 100km
+    # fuel_burn_rate in database in litres per 100km per passenger
     # calculate litres used
     fuel_consumed = distance * (fuel_burn_rate / 100)
     # return used fuel in litres

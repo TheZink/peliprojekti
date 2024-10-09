@@ -13,11 +13,12 @@ random_choice, visited, keys = [], [], []
 
 # we give player 5 different airports in random
 # Function select randomly 5 airports from game_airports dictionary
-# random_choice list gets airport ident codes only from dictionary
+# random_choice list gets only airport ident codes from dictionary
 def random_5_airports(where_r_u_now: str):
     location = where_r_u_now
-    # make list of all keys in games airports
+    # create infunc dictionary of airport idents
     airports = game_var.game_airports
+    # make list of all keys in airports dictionary
     keys = list(airports.keys())
     # empty random choise list
     random_choice.clear()
@@ -79,7 +80,7 @@ def moving_ap2ap(ident: str,location: str):
     print(f"Distance is {distance:.0f} km.")
     # get players airplane fuel burn rate from db in litres per 100km
     fuel_burn_rate = game_sql.airplane_info(game_var.airplane)[1]
-    print(f"Fuel burn rate is {fuel_burn_rate} litres per 100km.")
+    print(f"Fuel burn rate is {fuel_burn_rate} litres per 100km per passenger.")
     # get players airplane speed from db in kph
     speed = game_sql.airplane_info(game_var.airplane)[2]
     print(f"AP speed is {speed} m/s ({speed*3.6} km/h).")

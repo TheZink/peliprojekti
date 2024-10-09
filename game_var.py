@@ -10,6 +10,8 @@ boxes_to_transport = 15
 
 home_airport = "EFHK"
 
+home_continent = "EU"
+
 airplane = 1
 
 boxes_delivered = 0 
