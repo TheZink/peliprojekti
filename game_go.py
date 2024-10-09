@@ -1,6 +1,7 @@
 # This file runs all ingame functions while player plays the game
 
 import game_var, game_sql, game_math, random
+from colorama import Fore
 
 # gameplay follow up variables
 
@@ -40,6 +41,8 @@ def random_5_airports(where_r_u_now: str):
 def choose_where_to_go(where_r_u_now: str):
     airports = game_var.game_airports
     location = where_r_u_now
+    print(Fore.GREEN + "---------------------------------------------")
+    print(Fore.RESET)
     print("Laatikoita löytyy muun muuassa näistä lentokentiltä:")
     print()
     # current AP coordinates, gets tuple with (latitude, longitude) coordinates
@@ -73,6 +76,9 @@ def moving_ap2ap(ident: str,location: str):
     if ident != game_var.home_airport:
         visited.append(ident)
     # calculate traveled distance, used time, used fuel
+    print(Fore.GREEN + "---------------------------------------------")
+    print(Fore.RESET)
+    print()
     print("Doing some debugging prints..........")
     # calculate distance traveled
     # send latitude, longitude for prev and next airport
@@ -107,6 +113,9 @@ def at_new_airport(location: str):
         loading = airports[location]
     else:
         loading = empty_room_in_plane
+    print(Fore.GREEN + "---------------------------------------------")
+    print(Fore.RESET)
+    print()
     print(f"Saavuit {game_sql.get_information(location)[0]} lentokentälle.\nKentällä on {airports[location]} laatikkoa odottamassa noutoa.\nKoneeseen mahtuu vielä {game_sql.airplane_info(game_var.airplane)[3]-game_var.boxes_in_plane} laatikkoa.")
     print()
     game_var.boxes_in_plane = game_var.boxes_in_plane + loading
@@ -136,7 +145,11 @@ def at_new_airport(location: str):
     '''
 
 def at_home_airport(where_r_u_now: str):
-    print(f"Saavuit kotiin {game_sql.get_information(where_r_u_now)[0]} lentokentälle.")
+    print(Fore.GREEN + "---------------------------------------------")
+    print(Fore.RESET)
+    print()
+    print(Fore.RED + f"Saavuit kotiin {game_sql.get_information(where_r_u_now)[0]} lentokentälle.")
+    print(Fore.RESET)
     print()
     location = where_r_u_now
     # unload boxes
@@ -152,11 +165,3 @@ def at_home_airport(where_r_u_now: str):
         random_5_airports(location)
     # if boxes_delivered >= game_start.boxes_to_transport:
         # end game_go.py and move to game_over.py
-
-
-
-'''
-Jos halutaan värikästä tekstiä terminaaliin:
-from termcolor import colored
-print(colored('hello', 'red'), colored('world', 'green'))
-'''

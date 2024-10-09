@@ -1,13 +1,14 @@
 # This files runs new game setup for new player
 
 import game_sql, game_var
+from colorama import Fore
 
 # Setup new player info
 def set_new_player():
     game_var.player_name = input("Kirjoita nimesi tähän: ")
     print()
     game_sql.create_users(game_var.player_name)
-    print(f"Tervetuloa pilotti {game_var.player_name}")
+    print(f"Tervetuloa pilotti {game_var.player_name}!")
     print()
     # print(game_var.player_id)
 
@@ -18,6 +19,8 @@ def set_airports():
 
 # print the start info to player
 def print_startinfo():
+    print(Fore.GREEN + "---------------------------------------------")
+    print(Fore.RESET)
     print(f"Olet tällä hetkellä {game_sql.get_information(game_var.home_airport)[0]} lentokentällä.\nSe sijaitsee maassa {game_sql.get_information(game_var.home_airport)[2]}.")
     print(f"Tämä kenttä on kotikenttäsi, josta lähdet liikkeelle.\nJa jonne sinun tulee noutaa laatikoita.")
     print()
