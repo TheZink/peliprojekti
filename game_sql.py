@@ -48,6 +48,7 @@ def get_information(ident):
     tulos = kursori.fetchall()
 
     for info in tulos:
+        # return ap name, ap municipality, ap country name
         return(info[0],info[1],info[2])
 
 
@@ -59,8 +60,9 @@ def get_coordinates(ident):
     tulos = kursori.fetchall()
 
     for kordinaatti in tulos:
+        # return latitude, longitude
         place = kordinaatti[0], kordinaatti[1]
-        return place # return kordinaatit
+        return place # return coordinates
 
 
 # Function to get info from airplane name, model, consume, capasity

@@ -1,8 +1,6 @@
 # This file contains all the functions needed to do math ingame
 
-import game_sql
 from geopy.distance import geodesic
-
 
 # This function calculates the distance between any 2 airport locations given
 # distance return in km
@@ -35,7 +33,7 @@ def calculate_time_spent(distance, speed):
     return time_spent
 
 
-# score:
+# Function to calculate score for player
 # def calculate_score(flight_time, fuel_used, money ):
     
 

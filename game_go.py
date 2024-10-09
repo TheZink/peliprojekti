@@ -56,13 +56,17 @@ def moving_ap2ap(ident,location):
     if ident != game_var.home_airport:
         visited.append(ident)
     # calculate traveled distance, used time, used fuel
+    # send latitude, longitude
     distance = game_math.distance_calculate(prev_coords[0], prev_coords[1], dest_coords[0], dest_coords[1])
+    # get players airplane fuel burn rate from db in litres per 100km
     fuel_burn_rate = game_sql.airplane_info(game_var.airplane)[2]
+    # get players airplane speed from db in kph
     speed = game_sql.airplane_info(game_var.airplane)[3]
+    # calculate consumed fuel using traveled distance in km and fuel burn rate per km
     fuel_consumed = game_math.calculate_fuel(distance, fuel_burn_rate)
+    # calculate time spent flying using traveled distance and ap speed
     time_spent = game_math.calculate_time_spent(distance, speed)
     # update database player stats
-    # print(f"{game_var.player_name}")
     game_sql.update_game(game_var.player_name, distance, time_spent, fuel_consumed)
     if ident == game_var.home_airport:
         at_home_airport()
